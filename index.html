@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="UTF-8">
+<title>Rack Planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Warehouse Rack Planner</h1>
+
+<div class="container">
+
+  <div class="panel">
+    <h2>Add Pallet Type</h2>
+
+    <input id="name" placeholder="Name">
+    <input id="width" placeholder="Width cm">
+    <input id="depth" placeholder="Depth cm">
+    <input id="height" placeholder="Height cm">
+
+    <label class="toggle-row">
+  <span>
+    <strong>Stackable</strong>
+    <small>Allow double stacking when height permits</small>
+  </span>
+
+  <input type="checkbox" id="stackable">
+  <div class="toggle-switch"></div>
+</label>
+
+    <button onclick="addPallet()">Save</button>
+  </div>
+
+  <div class="panel">
+    <h2>Plan</h2>
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+  <button onclick="savePlan()" class="save-btn">Save Plan</button>
+  <button onclick="loadPlan()" class="load-btn">Load Plan</button>
+</div>
+
+    <div>
+  <select id="palletSelect"></select>
+  <input id="quantity" placeholder="Quantity">
+  <button onclick="addToPlan()">Add to plan</button>
+</div>
+
+<ul id="planList"></ul>
+
+    <h3>Select Locations</h3>
+    <button onclick="suggestLocation()" class="suggest-btn">
+  Suggest Best Location
+</button>
+
+<div id="selectedLocations" class="selected-locations">
+  Selected locations: none
+</div>
+
+    <div id="locations"></div>
+
+    <button onclick="generate()">Generate Plan</button>
+  </div>
+
+  <div class="panel">
+  <h2>Result</h2>
+  <button onclick="exportPDF()" class="print-btn">Export PDF</button>
+
+  <div id="reportCards" class="report-cards"></div>
+  <div id="legend"></div>
+<div id="bayDetails" class="bay-details">
+  Click a bay to see details.
+</div>
+<div id="loading" class="loading hidden">
+  Calculating best rack layout...
+</div>
+
+<div id="visual"></div>
+  <pre id="result"></pre>
+</div> 
+
+</div>
+
+<script src="app.js"></script>
+<div class="footer-actions">
+  <button onclick="resetApp()" class="reset-btn">
+    Reset saved pallets
+  </button>
+</div>
+</body>
+</html>
